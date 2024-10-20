@@ -2,11 +2,8 @@ import pandas as pd
 import streamlit as st
 
 # Função principal do Streamlit
-def metric(file):
-    df = pd.read_excel(file, engine='openpyxl', skiprows=5)
-    if df.empty or 'Título do anúncio' not in df.columns:
-        # Se não funcionar, tentar ler pulando 6 linhas
-        df = pd.read_excel(file, engine='openpyxl', skiprows=6)
+def metric(df):
+
 
     # Calcular as métricas
     faturamento_total = df['Receita por produtos (BRL)'].sum()  # Supondo que a coluna se chama 'Receita'

@@ -14,13 +14,7 @@ estado_to_sigla = {
 }
 
 
-def faturamentoDespesas(file):
-    # Carregar os dados
-    df = pd.read_excel(file, engine='openpyxl', skiprows=5)
-
-    if df.empty or 'Título do anúncio' not in df.columns:
-        # Se não funcionar, tentar ler pulando 6 linhas
-        df = pd.read_excel(file, engine='openpyxl', skiprows=6)
+def faturamentoDespesas(df):
 
     # Renomear a coluna Status.1 para 'estados' e substituir os nomes completos pelas siglas
     df['estados'] = df['Status.1'].map(estado_to_sigla)
@@ -66,11 +60,8 @@ def faturamentoDespesas(file):
 
 
 # Função principal do Streamlit
-def estadosMaisVendidos(file):
-    df = pd.read_excel(file, engine='openpyxl', skiprows=5)
-    if df.empty or 'Título do anúncio' not in df.columns:
-        # Se não funcionar, tentar ler pulando 6 linhas
-        df = pd.read_excel(file, engine='openpyxl', skiprows=6)
+def estadosMaisVendidos(df):
+
 
     # Renomear a coluna Status.1 para 'estados' e substituir os nomes completos pelas siglas
     df['estados'] = df['Status.1'].map(estado_to_sigla)
@@ -104,29 +95,29 @@ def estadosMaisVendidos(file):
     return fig_pizza
 
 
-def skuMaisVendido(file):
-    df = pd.read_excel(file, engine='openpyxl', skiprows=5)
-    if df.empty or 'Título do anúncio' not in df.columns:
-        # Se não funcionar, tentar ler pulando 6 linhas
-        df = pd.read_excel(file, engine='openpyxl', skiprows=6)
+def skuMaisVendido(df, num_produtos):
 
-    # Filtrar produtos que têm SKU (remover linhas onde SKU é vazio ou NaN)
-    df = df[df['SKU'].notna() & (df['SKU'] != '')]
 
     # Agrupar e somar as unidades vendidas por SKU
-    vendas_por_sku = df.groupby('SKU')['Unidades'].sum().reset_index()
+    vendas_por_sku = df.groupby('SKU').agg({
+    'SKU': 'first',
+    'Título do anúncio': 'first',  # Mantém o primeiro título do anúncio
+    'Receita por produtos (BRL)': 'sum',  # Soma a receita
+    'Unidades': 'sum'  # Soma as unidades
+}).sort_values(by='Unidades', ascending=False).head(num_produtos+1)
 
     # Ordenar os produtos mais vendidos
     vendas_por_sku = vendas_por_sku.sort_values(by='Unidades', ascending=False)
 
     # Criar o gráfico de barras
     fig = px.bar(
-        vendas_por_sku.iloc[1:11],
+        vendas_por_sku.iloc[1:],
         x='SKU',
         y='Unidades',
-        title='Produtos mais vendidos',
+        title=f'Os {num_produtos} Produtos mais vendidos',
         labels={'SKU': 'SKU', 'Unidades': 'Quantidade de Vendas'},
-        text_auto=True
+        text_auto=True,
+        hover_data={'Título do anúncio': True}
     )
 
     fig.update_layout(title_x=0.3)

@@ -5,7 +5,7 @@ import requests
 
 
 
-def mapaEstados(file):
+def mapaEstados(df):
     estado_to_sigla = {
         'Acre': 'AC', 'Alagoas': 'AL', 'Amazonas': 'AM', 'Amapá': 'AP', 'Bahia': 'BA',
         'Ceará': 'CE', 'Distrito Federal': 'DF', 'Espírito Santo': 'ES', 'Goiás': 'GO',
@@ -15,11 +15,6 @@ def mapaEstados(file):
         'Roraima': 'RR', 'Santa Catarina': 'SC', 'Sergipe': 'SE', 'São Paulo': 'SP', 'Tocantins': 'TO'
     }
 
-    if file is not None:
-        df = pd.read_excel(file, engine='openpyxl', skiprows=5)
-        if df.empty or 'Título do anúncio' not in df.columns:
-            # Se não funcionar, tentar ler pulando 6 linhas
-            df = pd.read_excel(file, engine='openpyxl', skiprows=6)
 
     # Renomear a coluna Status.1 para 'estados' e substituir os nomes completos pelas siglas
     df['estados'] = df['Status.1'].map(estado_to_sigla)
