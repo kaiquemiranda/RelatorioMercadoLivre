@@ -3,14 +3,18 @@ import metricas
 import mapa
 import graficos
 import pandas as pd
+import palavrachave
 
 st.set_page_config(page_title="Análise de Vendas de Peças", layout="wide")
 st.sidebar.image('mercado.png', width=250)
-st.sidebar.title("Análise de Vendas")
+
+
+st.sidebar.markdown(
+        "<h1 style='color: #031d4d; text-align: center; font-size: 30px;  margin-top: 40px; '>Análise de vendas</h1>",
+        unsafe_allow_html=True)
 
 with open("style/style.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
 
 lista = []
 col1, col2, col3 = st.columns([1, 1, 1])
@@ -70,7 +74,20 @@ if lista:
         with col2:
             # Mostrar o gráfico
             st.plotly_chart(graficos.estadosMaisVendidos(file))
+    with st.container():
+        st.sidebar.markdown('----')
+        palavrachave.filtro(file)
 else:
     st.markdown(
-        "<h1 style='color: #031d4d; text-align: center; font-size: 60px;  margin-top: 80px; '>Carregue o excel do Mercado livre</h1>",
+        "<h1 style='color: #031d4d; text-align: center; font-size: 60px;  margin-top: 50px; margin-bottom: 150px; '>Carregue o excel do Mercado livre</h1>",
         unsafe_allow_html=True)
+
+
+with st.container():
+    coluna1, coluna2, coluna3 = st.columns([1, 1, 1])
+    with coluna1:
+        st.image('alfredos.png', width=150)
+    with coluna2:
+        st.image('Box7.png', width=150)
+    with coluna3:
+        st.image('marrocos.png', width=150)

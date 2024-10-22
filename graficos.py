@@ -123,4 +123,3 @@ def skuMaisVendido(df, num_produtos):
     fig.update_layout(title_x=0.3)
 
     return fig
-
