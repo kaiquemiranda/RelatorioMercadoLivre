@@ -152,6 +152,6 @@ def freteAlto(df):
                  hover_data={'Título do anúncio': True, 'N.º de venda': True})
 
     # Ajustar a rotação do eixo x e alinhamento dos rótulos
-    fig.update_xaxes(tickangle=45, tickmode='linear')
+    fig.update_layout(title_x=0.3)
 
     return fig
