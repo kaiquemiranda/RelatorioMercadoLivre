@@ -132,7 +132,7 @@ def freteAlto(df):
     df['Porcentagem frete'] = fretePositivo / (df['Receita por produtos (BRL)'] / 100)
     frete30 = df[['Data da venda', 'Título do anúncio', 'N.º de venda', 'SKU', 'Receita por produtos (BRL)', 'Porcentagem frete', 'frete real']]
     maior_frete = frete30[frete30['Porcentagem frete'] > 60].sort_values('Porcentagem frete')
-    maior100 = frete30[frete30['frete real'] < -120]
+    maior100 = frete30[frete30['frete real'] < -150]
     media = df['frete real'].mean()
     lista = [maior100, maior_frete]
     maior100conc = pd.concat(lista)
