@@ -153,7 +153,6 @@ def freteAlto(df):
     if maior_frete_sku is not None:
         # Ajustar a rotação do eixo x e alinhamento dos rótulos
         fig.update_layout(title_x=0.3)
-        st.write(maior100conc)
         return fig
     else:
         return st.markdown("Não há vendas com frete maior que 30% no período informado")
