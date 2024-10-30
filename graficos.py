@@ -131,7 +131,7 @@ def freteAlto(df):
     fretePositivo = df['frete real'] - df['frete real'] - df['frete real']
     df['Porcentagem frete'] = fretePositivo / (df['Receita por produtos (BRL)'] / 100)
     frete30 = df[['Data da venda', 'Título do anúncio', 'N.º de venda', 'SKU', 'Receita por produtos (BRL)', 'Porcentagem frete', 'frete real']]
-    maior_frete = frete30[frete30['Porcentagem frete'] > 30].sort_values('Porcentagem frete')
+    maior_frete = frete30[frete30['Porcentagem frete'] > 60].sort_values('Porcentagem frete')
     maior100 = frete30[frete30['frete real'] < -120]
     media = df['frete real'].mean()
     lista = [maior100, maior_frete]
@@ -151,7 +151,11 @@ def freteAlto(df):
                  text='Porcentagem frete',
                  hover_data={'Título do anúncio': True, 'Receita por produtos (BRL)': True, 'frete real': True})
 
-    # Ajustar a rotação do eixo x e alinhamento dos rótulos
-    fig.update_layout(title_x=0.3)
+    if maior100conc is not None:
+        # Ajustar a rotação do eixo x e alinhamento dos rótulos
+        fig.update_layout(title_x=0.3)
+        return fig
+    else:
+        return st.markdown("Não há vendas com frete maior que 30% no período informado")
 
-    return fig
+    
