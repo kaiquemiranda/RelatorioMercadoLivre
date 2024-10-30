@@ -65,7 +65,7 @@ if lista:
         with colu2:
             st.plotly_chart(mapa.mapaEstados(file))
         with colu3:
-            st.plotly_chart(mapa.mapaEstados(file))
+            st.plotly_chart(mapa.estadosMaisVendidos(file))
     with st.container():
         col1, col2 = st.columns([3, 2])
         with col1:
