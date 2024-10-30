@@ -149,7 +149,7 @@ def freteAlto(df):
                  title='Vendas com frete maior que 30%',
                  labels={'Porcentagem frete': 'Porcentagem frete', 'SKU': 'SKU'},
                  text='Porcentagem frete',
-                 hover_data={'Título do anúncio': True, 'N.º de venda': True})
+                 hover_data={'Título do anúncio': True, 'Receita por produtos (BRL)': True, 'frete real': True})
 
     # Ajustar a rotação do eixo x e alinhamento dos rótulos
     fig.update_layout(title_x=0.3)
