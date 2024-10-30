@@ -59,10 +59,12 @@ if lista:
     with st.container():
         metricas.metric(file)
     with st.container():
-        colu1, colu2 = st.columns([1, 2])
+        colu1, colu2, colu3 = st.columns([1, 1, 1])
         with colu1:
             st.plotly_chart(graficos.faturamentoDespesas(file))
         with colu2:
+            st.plotly_chart(mapa.mapaEstados(file))
+        with colu3:
             st.plotly_chart(mapa.mapaEstados(file))
     with st.container():
         col1, col2 = st.columns([3, 2])
@@ -73,7 +75,7 @@ if lista:
             st.plotly_chart(graficos.skuMaisVendido(file, num_produtos))
         with col2:
             # Mostrar o gráfico
-            st.plotly_chart(graficos.estadosMaisVendidos(file))
+            st.plotly_chart(graficos.freteAlto(file))
     with st.container():
         st.sidebar.markdown('----')
         palavrachave.filtro(file)
