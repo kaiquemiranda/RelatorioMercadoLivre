@@ -151,7 +151,7 @@ def freteAlto(df):
                  text='Porcentagem frete',
                  hover_data={'Título do anúncio': True, 'Receita por produtos (BRL)': True, 'frete real': True})
 
-    if maior100conc is not None:
+    if maior_frete_sku:
         # Ajustar a rotação do eixo x e alinhamento dos rótulos
         fig.update_layout(title_x=0.3)
         return fig
