@@ -49,6 +49,7 @@ def mapaEstados(df):
 
     # Ajustar o mapa para focar no Brasil
     fig.update_geos(
+        fitbounds="locations",  # Ajustar os limites do mapa
         visible=False,  # Remover linhas de grade
     )
 
