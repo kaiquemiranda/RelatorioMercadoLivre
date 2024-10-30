@@ -69,16 +69,15 @@ if lista:
         with col2:
             # Mostrar o gráfico
             st.plotly_chart(graficos.freteAlto(file))
-        with st.container():
+    with st.container():
         colu1, colu2, colu3 = st.columns([1, 1, 1])
-            
         with colu1:
             st.plotly_chart(graficos.faturamentoDespesas(file))
         with colu2:
             st.plotly_chart(mapa.mapaEstados(file))
         with colu3:
             st.plotly_chart(graficos.estadosMaisVendidos(file))
-                
+        
     with st.container():
         st.sidebar.markdown('----')
         palavrachave.filtro(file)
