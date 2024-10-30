@@ -129,7 +129,7 @@ def freteAlto(df):
     # Calculo de porcentagem de frete
     df['frete real'] = df['Tarifas de envio'] + df['Receita por envio (BRL)']
     fretePositivo = df['frete real'] - df['frete real'] - df['frete real']
-    df['Porcentagem frete'] = fretePositivo / (df['Receita por produtos (BRL)'] / 100)
+    df['Porcentagem frete'] = (fretePositivo / df['Receita por produtos (BRL)']) * 100
     frete30 = df[['Data da venda', 'Título do anúncio', 'N.º de venda', 'SKU', 'Receita por produtos (BRL)', 'Porcentagem frete', 'frete real']]
     maior_frete = frete30[frete30['Porcentagem frete'] > 29].sort_values('Porcentagem frete')
     maior100 = frete30[frete30['frete real'] < -120]
@@ -153,6 +153,7 @@ def freteAlto(df):
     if maior_frete_sku is not None:
         # Ajustar a rotação do eixo x e alinhamento dos rótulos
         fig.update_layout(title_x=0.3)
+        st.write(maior100conc)
         return fig
     else:
         return st.markdown("Não há vendas com frete maior que 30% no período informado")
