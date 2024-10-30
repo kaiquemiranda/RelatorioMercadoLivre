@@ -45,7 +45,7 @@ def mapaEstados(df):
         title='Percentual de Vendas por Estado no Brasil'
     )
     
-    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0}, title_x=0.1)
+    fig.update_layout(title_x=0.1)
 
     # Ajustar o mapa para focar no Brasil
     fig.update_geos(
