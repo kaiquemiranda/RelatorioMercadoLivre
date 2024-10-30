@@ -123,3 +123,35 @@ def skuMaisVendido(df, num_produtos):
     fig.update_layout(title_x=0.3)
 
     return fig
+
+
+def freteAlto(df):
+    # Calculo de porcentagem de frete
+    df['frete real'] = df['Tarifas de envio'] + df['Receita por envio (BRL)']
+    fretePositivo = df['frete real'] - df['frete real'] - df['frete real']
+    df['Porcentagem frete'] = fretePositivo / (df['Receita por produtos (BRL)'] / 100)
+    frete30 = df[['Data da venda', 'Título do anúncio', 'N.º de venda', 'SKU', 'Receita por produtos (BRL)', 'Porcentagem frete', 'frete real']]
+    maior_frete = frete30[frete30['Porcentagem frete'] > 30].sort_values('Porcentagem frete')
+    maior100 = frete30[frete30['frete real'] < -120]
+    media = df['frete real'].mean()
+    lista = [maior100, maior_frete]
+    maior100conc = pd.concat(lista)
+
+    maior_frete_sku = maior100conc.groupby('SKU').agg({
+    'SKU': 'first',
+    'Título do anúncio': 'first',  # Mantém o primeiro título do anúncio
+    'Receita por produtos (BRL)': 'sum',  # Soma a receita
+    'N.º de venda': "first"
+    })
+    maior_frete_sku = maior100conc.sort_values(by='Porcentagem frete', ascending=False)
+
+    fig = px.bar(maior_frete_sku, x='SKU', y='Porcentagem frete',
+                 title='Vendas com frete maior que 30%',
+                 labels={'Porcentagem frete': 'Porcentagem frete', 'SKU': 'SKU'},
+                 text='Porcentagem frete',
+                 hover_data={'Título do anúncio': True, 'N.º de venda': True})
+
+    # Ajustar a rotação do eixo x e alinhamento dos rótulos
+    fig.update_xaxes(tickangle=45, tickmode='linear')
+
+    return fig
