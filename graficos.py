@@ -148,7 +148,6 @@ def freteAlto(df):
     fig = px.bar(maior_frete_sku, x='SKU', y='Porcentagem frete',
                  title='Vendas com frete maior que 30%',
                  labels={'Porcentagem frete': 'Porcentagem frete', 'SKU': 'SKU'},
-                 text='Porcentagem frete',
                  hover_data={'Título do anúncio': True, 'Receita por produtos (BRL)': True, 'frete real': True})
 
     if maior_frete_sku is not None:
