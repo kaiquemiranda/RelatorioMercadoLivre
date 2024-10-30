@@ -42,10 +42,11 @@ def mapaEstados(df):
         hover_data={'vendas': True, 'percentual': ':.2f'},  # Mostrar vendas e percentual no hover
         color_continuous_scale='Cividis',
         labels={'percentual': 'Percentual de Vendas (%)'},
-        title='Percentual de Vendas por Estado no Brasil'
+        title='Percentual de Vendas por Estado no Brasil',
+        scope="brazil",
     )
-
-    fig.update_layout(title_x=0.3)
+    
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0}, title_x=0.1)
 
     # Ajustar o mapa para focar no Brasil
     fig.update_geos(
