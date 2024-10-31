@@ -95,3 +95,9 @@ with st.container():
         st.image('Box7.png', width=150)
     with coluna3:
         st.image('marrocos.png', width=150)
+
+
+
+st.markdown("<p style='text-align: center; margin-top: 200px; '> </p>", unsafe_allow_html=True)
+st.markdown("---")
+st.markdown("<p style='text-align: center; font-size: 25px;'>Desenvolvido por Kaique Miranda - © 2024</p>", unsafe_allow_html=True)
