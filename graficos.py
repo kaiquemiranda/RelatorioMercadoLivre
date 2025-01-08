@@ -17,7 +17,7 @@ estado_to_sigla = {
 def faturamentoDespesas(df):
 
     # Renomear a coluna Status.1 para 'estados' e substituir os nomes completos pelas siglas
-    df['estados'] = df['Estado'].map(estado_to_sigla)
+    df['estados'] = df['Estado.1'].map(estado_to_sigla)
 
     # Cálculos de faturamento e despesas
     faturamento_total = df['Receita por produtos (BRL)'].sum()
@@ -64,7 +64,7 @@ def estadosMaisVendidos(df):
 
 
     # Renomear a coluna Status.1 para 'estados' e substituir os nomes completos pelas siglas
-    df['estados'] = df['Estado'].map(estado_to_sigla)
+    df['estados'] = df['Estado.1'].map(estado_to_sigla)
 
     # Contar vendas por estado
     vendas_por_estado = df['estados'].value_counts().reset_index()
