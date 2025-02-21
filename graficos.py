@@ -111,7 +111,7 @@ def skuMaisVendido(df, num_produtos):
 
     # Criar o gráfico de barras
     fig = px.bar(
-        vendas_por_sku.iloc[1:],
+        vendas_por_sku.iloc[0:],
         x='SKU',
         y='Unidades',
         title=f'Os {num_produtos} Produtos mais vendidos',
